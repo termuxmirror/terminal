@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main  # Ändere dies entsprechend deiner Hauptbranch-Bezeichnung
+  pull_request:
+    branches:
+      - main  # Ändere dies entsprechend deiner Hauptbranch-Bezeichnung
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout-Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8  # Ändere dies entsprechend der von dir verwendeten Python-Version
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          # Hier kannst du weitere Installationsanweisungen hinzufügen, falls erforderlich
+
+      - name: Run tests
+        run: pytest  # Ändere dies entsprechend dem Befehl, um deine Tests auszuführen
